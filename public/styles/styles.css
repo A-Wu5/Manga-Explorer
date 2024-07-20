@@ -1,0 +1,14 @@
+a {
+  text-decoration: none;
+  color: white;
+}
+
+body {
+  background-color: #161828;
+  color: white;
+}
+
+h1:hover {
+  color: rgb(88 199 250);
+  transition: color 0.5s;
+}
