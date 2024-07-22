@@ -1,6 +1,9 @@
 <%- include("./partials/header.ejs") %>
 <% if (locals.mangaData) { %>
-<%= mangaData.attributes["title"]["en"] %>
+<h2> <%= mangaData.attributes["title"]["en"] %> </h2>
+<p> Year: <%= mangaData.attributes["year"] %> </p>
+<p> Latest Chapter: <%= mangaData.attributes["lastChapter"]%></p>
+<p> Status: <%= mangaData.attributes["status"] %></p>
 <p> <%= mangaData.attributes["description"]["en"]%></p>
 
 <% } else { %>

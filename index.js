@@ -25,7 +25,9 @@ app.get("/view/:mangaId", async (req, res) => {
       manga = response.data.data;
       searchCache[mangaId] = manga;
     }
-    res.render("view.ejs", { mangaData: manga });
+    var feed = await axios.get(apiURL + "/manga/" + mangaId + "/feed");
+    var chapters = feed.data;
+    res.render("view.ejs", { mangaData: manga, chaptersData: chapters });
   } catch (error) {
     console.error(error.response.data);
     res.render("view.ejs", {

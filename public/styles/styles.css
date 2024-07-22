@@ -21,3 +21,8 @@ h1:hover {
 .title {
   font-family: "Noto-sans", sans-serif;
 }
+
+.search-bar {
+  padding: 1rem 0rem;
+  margin: 1rem 0rem;
+}
