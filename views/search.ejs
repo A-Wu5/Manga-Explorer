@@ -1,13 +1,9 @@
 <%- include("./partials/header.ejs") %>
 
-<form action="/search" method="post">
-    <input type="text" name="title" />
-    <input type="submit" />
-</form>
 <% if (locals.mangaList && locals.total){ %>
     <p>Search result: <%=total%> manga</p>
     <% mangaList.forEach((manga) => { %>
-    <h2 class="title"><%= manga["attributes"]["title"]["en"] %></h2>
+    <h2 class="title"><a href="#"><%= manga["attributes"]["title"]["en"] %></a></h2>
     <p>Status: <%=manga["attributes"]["status"] %></p>
     <p>Description: <%=manga["attributes"]["description"]["en"]%></p>
     <% }) %> 

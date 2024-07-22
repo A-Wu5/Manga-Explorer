@@ -8,8 +8,8 @@ const apiURL = "https://api.mangadex.org";
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post("/search", async (req, res) => {
-  const mangaTitle = req.body.title;
+app.get("/search", async (req, res) => {
+  const mangaTitle = req.query.title;
   try {
     const response = await axios.get(apiURL + "/manga", {
       params: { title: mangaTitle },
@@ -18,14 +18,14 @@ app.post("/search", async (req, res) => {
     const searchResult = response.data.data;
     // The api returns 'total' which is the length of the 'data' list
     const resultNumber = response.data.total;
-    res.render("index.ejs", { mangaList: searchResult, total: resultNumber });
+    res.render("search.ejs", { mangaList: searchResult, total: resultNumber });
   } catch (error) {
     console.error(error);
   }
 });
 
 app.get("/", (req, res) => {
-  res.render("index.ejs");
+  res.render("search.ejs");
 });
 
 app.listen(port, () => {
