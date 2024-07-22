@@ -22,7 +22,7 @@ app.get("/view/:mangaId", async (req, res) => {
     } else {
       console.log("Retrieving manga from mangaDex API ");
       const response = await axios.get(apiURL + "/manga/" + mangaId);
-      manga = response.data;
+      manga = response.data.data;
       searchCache[mangaId] = manga;
     }
     res.render("view.ejs", { mangaData: manga });
