@@ -1,0 +1,8 @@
+<%- include("./partials/header.ejs") %>
+<% if (locals.mangaData) { %>
+<%= mangaData.attributes["title"]["en"] %>
+<% } else { %>
+<%= errorMessage %>
+<% } %>
+
+<%- include("./partials/footer.ejs") %>

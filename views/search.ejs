@@ -3,7 +3,7 @@
 <% if (locals.mangaList && locals.total){ %>
     <p>Search result: <%=total%> manga</p>
     <% mangaList.forEach((manga) => { %>
-    <h2 class="title"><a href="#"><%= manga["attributes"]["title"]["en"] %></a></h2>
+    <h2 class="title"><a href="/view/<%=manga["id"]%>"><%= manga["attributes"]["title"]["en"] %></a></h2>
     <p>Status: <%=manga["attributes"]["status"] %></p>
     <p>Description: <%=manga["attributes"]["description"]["en"]%></p>
     <% }) %> 
