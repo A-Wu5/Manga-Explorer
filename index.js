@@ -33,11 +33,7 @@ app.get("/view/:mangaId", async (req, res) => {
       },
     });
     var chapters = feed.data.data;
-    console.log(chapters);
 
-    for (let i = 0; i < 5; i++) {
-      console.log(chapters[i]);
-    }
     res.render("view.ejs", { mangaData: manga, chaptersData: chapters });
   } catch (error) {
     console.error(error.response.data);
