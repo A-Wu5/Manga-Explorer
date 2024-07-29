@@ -23,10 +23,21 @@ app.get("/view/:mangaId", async (req, res) => {
       console.log("Retrieving manga from mangaDex API ");
       const response = await axios.get(apiURL + "/manga/" + mangaId);
       manga = response.data.data;
-      searchCache[mangaId] = manga;
+      searchCache[mangaId] = manga; // Add to manga cache
     }
-    var feed = await axios.get(apiURL + "/manga/" + mangaId + "/feed");
-    var chapters = feed.data;
+    var feed = await axios.get(apiURL + "/manga/" + mangaId + "/feed", {
+      params: {
+        limit: 10,
+        translatedLanguage: ["en"],
+        order: { chapter: "asc" },
+      },
+    });
+    var chapters = feed.data.data;
+    console.log(chapters);
+
+    for (let i = 0; i < 5; i++) {
+      console.log(chapters[i]);
+    }
     res.render("view.ejs", { mangaData: manga, chaptersData: chapters });
   } catch (error) {
     console.error(error.response.data);
@@ -39,7 +50,6 @@ app.get("/view/:mangaId", async (req, res) => {
 app.get("/search", async (req, res) => {
   // Clear cache before each search
   for (var id in searchCache) delete searchCache[id];
-  console.log("cache:", searchCache);
   const mangaTitle = req.query.title;
   try {
     const response = await axios.get(apiURL + "/manga", {

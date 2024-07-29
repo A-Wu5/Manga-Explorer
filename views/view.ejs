@@ -5,7 +5,9 @@
 <p> Latest Chapter: <%= mangaData.attributes["lastChapter"]%></p>
 <p> Status: <%= mangaData.attributes["status"] %></p>
 <p> <%= mangaData.attributes["description"]["en"]%></p>
-
+<% chaptersData.forEach((chapter) => { %>
+    <p> <%= chapter["attributes"].chapter %> <%= chapter["attributes"].title %> </p>
+<% }) %>
 <% } else { %>
 <%= errorMessage %>
 <% } %>
