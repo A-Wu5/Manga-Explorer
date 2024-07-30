@@ -1,6 +1,7 @@
 import express from "express";
 import axios from "axios";
 import bodyParser from "body-parser";
+import fs from "fs";
 
 const app = express();
 const port = 3000;
@@ -10,6 +11,38 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 var searchCache = {};
 
+// Retrieves chapter data and downloads chapter
+// Then renders pages downloaded
+app.get("/view/chapter/:chapterId", async (req, res) => {
+  let chapterId = req.params.chapterId;
+  /*
+    Get Chapter metadata
+  */
+  const chapter = await axios.get(apiURL + "/at-home/server/" + chapterId);
+  const host = chapter.data.baseUrl;
+  const chapterHash = chapter.data.chapter.hash;
+  const data = chapter.data.chapter.data; // Array of page file names
+  const dataSaver = chapter.data.chapter.dataSaver; // Array of page file names
+  var endPoint = `${host}/data/${chapterHash}/`;
+
+  /*
+    Download Chapter pages
+  */
+  const folderPath = `public/chapters/${chapterId}`;
+  var pages = [];
+  fs.mkdirSync(folderPath, { recursive: true });
+  for (const page of data) {
+    const pageObj = await axios.get(endPoint + page, {
+      responseType: "arraybuffer",
+    });
+    pages.push(`/chapters/${chapterId}/${page}`);
+    fs.writeFileSync(`${folderPath}/${page}`, pageObj.data);
+  }
+  console.log(`Downloaded ${data.length} pages.`);
+  res.render("viewChapter.ejs", { chapter: pages });
+});
+
+// Retrieves metadata of manga and displays it
 app.get("/view/:mangaId", async (req, res) => {
   const mangaId = req.params.mangaId;
 
@@ -23,7 +56,7 @@ app.get("/view/:mangaId", async (req, res) => {
       console.log("Retrieving manga from mangaDex API ");
       const response = await axios.get(apiURL + "/manga/" + mangaId);
       manga = response.data.data;
-      searchCache[mangaId] = manga; // Add to manga cache
+      searchCache[mangaId] = manga; // Adds manga obj to manga cache
     }
     var feed = await axios.get(apiURL + "/manga/" + mangaId + "/feed", {
       params: {
@@ -43,6 +76,7 @@ app.get("/view/:mangaId", async (req, res) => {
   }
 });
 
+// Retrieves metadata of manga that fit the search result
 app.get("/search", async (req, res) => {
   // Clear cache before each search
   for (var id in searchCache) delete searchCache[id];

@@ -5,9 +5,15 @@
 <p> Latest Chapter: <%= mangaData.attributes["lastChapter"]%></p>
 <p> Status: <%= mangaData.attributes["status"] %></p>
 <p> <%= mangaData.attributes["description"]["en"]%></p>
+<div>
 <% chaptersData.forEach((chapter) => { %>
-    <p> <%= chapter["attributes"].chapter %> <%= chapter["attributes"].title %> </p>
+    <a href="/view/chapter/<%=chapter["id"]%>">
+      <p> 
+        Ch. <%= chapter["attributes"].chapter %> <%= chapter["attributes"].title %> 
+      </p>
+    </a>
 <% }) %>
+</div>
 <% } else { %>
 <%= errorMessage %>
 <% } %>

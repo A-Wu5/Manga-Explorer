@@ -1,0 +1,11 @@
+<%- include("./partials/header.ejs") %>
+
+<% if (locals.chapter){ %>
+    
+    <!-- <img src="/chapters/test.gif" alt="test"> -->
+    <% for (const page of chapter){ %>
+        <img class="chapterPage" src="<%= page %>" alt="chapter page"/>
+    <% } %>
+<% } %>
+
+<%- include("./partials/footer.ejs") %>

@@ -26,3 +26,8 @@ h1:hover {
   padding: 1rem 0rem;
   margin: 1rem 0rem;
 }
+
+.chapterPage {
+  display: block;
+  width: 70rem;
+}
