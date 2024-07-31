@@ -27,7 +27,12 @@ h1:hover {
   margin: 1rem 0rem;
 }
 
+.chapter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .chapterPage {
-  display: block;
-  width: 70rem;
+  width: 65rem;
 }

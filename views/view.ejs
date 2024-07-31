@@ -7,7 +7,7 @@
 <p> <%= mangaData.attributes["description"]["en"]%></p>
 <div>
 <% chaptersData.forEach((chapter) => { %>
-    <a href="/view/chapter/<%=chapter["id"]%>">
+    <a href="/view/<%= mangaData.attributes["title"]["en"] %>/chapter/<%= chapter["attributes"].chapter %>/<%= chapter["id"] %>">
       <p> 
         Ch. <%= chapter["attributes"].chapter %> <%= chapter["attributes"].title %> 
       </p>

@@ -13,8 +13,10 @@ var searchCache = {};
 
 // Retrieves chapter data and downloads chapter
 // Then renders pages downloaded
-app.get("/view/chapter/:chapterId", async (req, res) => {
+app.get("/view/:manga/chapter/:chapterNum/:chapterId", async (req, res) => {
+  let mangaTitle = req.params.manga;
   let chapterId = req.params.chapterId;
+  let chapterNumber = req.params.chapterNum;
   /*
     Get Chapter metadata
   */
@@ -39,7 +41,11 @@ app.get("/view/chapter/:chapterId", async (req, res) => {
     fs.writeFileSync(`${folderPath}/${page}`, pageObj.data);
   }
   console.log(`Downloaded ${data.length} pages.`);
-  res.render("viewChapter.ejs", { chapter: pages });
+  res.render("viewChapter.ejs", {
+    title: mangaTitle,
+    number: chapterNumber,
+    chapter: pages,
+  });
 });
 
 // Retrieves metadata of manga and displays it
