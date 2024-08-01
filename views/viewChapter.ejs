@@ -3,6 +3,10 @@
 <% if (locals.chapter){ %>
     <h2> <%= title %> </h2>
     <h3> Ch. <%= number %> </h3>
+    <div class="d-flex">
+      <div>Next Button</div>
+      <div>Prev Button</div>
+    </div>
     <div class="chapter-container">
     <!-- <img src="/chapters/test.gif" alt="test"> -->
     <% for (const page of chapter){ %>

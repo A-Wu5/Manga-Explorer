@@ -11,6 +11,7 @@ body {
 
 h1 {
   font-family: "Noto-sans", sans-serif;
+  font-weight: bold;
 }
 
 h1:hover {
@@ -20,11 +21,16 @@ h1:hover {
 
 .title {
   font-family: "Noto-sans", sans-serif;
+  color: #79e4ffbc;
 }
 
 .search-bar {
   padding: 1rem 0rem;
   margin: 1rem 0rem;
+}
+
+.search-result:hover {
+  background-color: #1136515f;
 }
 
 .chapter-container {

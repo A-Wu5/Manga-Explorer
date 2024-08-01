@@ -1,12 +1,18 @@
 <%- include("./partials/header.ejs") %>
-
+<div>
 <% if (locals.mangaList && locals.total){ %>
     <p>Search result: <%=total%> manga</p>
     <% mangaList.forEach((manga) => { %>
-    <h2 class="title"><a href="/view/<%=manga["id"]%>"><%= manga["attributes"]["title"]["en"] %></a></h2>
-    <p>Status: <%=manga["attributes"]["status"] %></p>
-    <p>Description: <%=manga["attributes"]["description"]["en"]%></p>
+    <a href="/view/<%=manga["id"]%>">
+      <div class="search-result rounded-2 py-3">
+        <h3 class="title fw-bold"><%= manga["attributes"]["title"]["en"] %></h3>
+        <p>Status: <%=manga["attributes"]["status"] %></p>
+        <p>Description: <%=manga["attributes"]["description"]["en"]%></p>
+      </div>
+    </a>
     <% }) %> 
+<% } else { %>
+    <h2> Search for your favorite manga using the searchbar!</h2>
 <% } %>
-  
+</div>
 <%- include("./partials/footer.ejs") %>
