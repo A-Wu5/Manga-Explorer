@@ -66,7 +66,7 @@ app.get("/view/:mangaId", async (req, res) => {
     }
     var feed = await axios.get(apiURL + "/manga/" + mangaId + "/feed", {
       params: {
-        limit: 10,
+        limit: 25,
         translatedLanguage: ["en"],
         order: { chapter: "asc" },
       },
