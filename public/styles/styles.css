@@ -24,9 +24,13 @@ h1:hover {
   color: #79e4ffbc;
 }
 
-.search-bar {
+.search-bar-container {
   padding: 1rem 0rem;
-  margin: 1rem 0rem;
+  margin: 0rem 0rem;
+}
+
+.search-bar {
+  padding: 6px 10px;
 }
 
 .search-result:hover {
